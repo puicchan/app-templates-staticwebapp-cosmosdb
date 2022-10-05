@@ -4,9 +4,13 @@ param nameprefix string
 @description('Azure region for resources')
 param location string = resourceGroup().location
 
+param serviceName string
+var tags = { 'azd-env-name': nameprefix }
+
 resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
   name: '${nameprefix}graphqlfunc'
   location: location
+  tags: union(tags, { 'azd-service-name': serviceName })
   kind: 'functionapp'
   properties: {
     httpsOnly: true

@@ -7,6 +7,8 @@ param apiUrl string
 @description('The base URL of the website, without https://')
 param webUrl string
 
+var tags = { 'azd-env-name': nameprefix }
+
 resource frontdoor 'Microsoft.Cdn/profiles@2021-06-01' = {
   name: '${nameprefix}afd'
   location: 'Global'
